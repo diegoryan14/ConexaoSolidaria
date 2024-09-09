@@ -2,7 +2,6 @@ package com.conexaosolidaria.app.domain;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
-import java.time.Duration;
 import java.time.Instant;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -30,10 +29,10 @@ public class Eventos implements Serializable {
     private Instant data;
 
     @Column(name = "hora_inicio")
-    private Duration horaInicio;
+    private String horaInicio;
 
     @Column(name = "hora_termino")
-    private Duration horaTermino;
+    private String horaTermino;
 
     @Column(name = "observacao")
     private String observacao;
@@ -82,29 +81,29 @@ public class Eventos implements Serializable {
         this.data = data;
     }
 
-    public Duration getHoraInicio() {
+    public String getHoraInicio() {
         return this.horaInicio;
     }
 
-    public Eventos horaInicio(Duration horaInicio) {
+    public Eventos horaInicio(String horaInicio) {
         this.setHoraInicio(horaInicio);
         return this;
     }
 
-    public void setHoraInicio(Duration horaInicio) {
+    public void setHoraInicio(String horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Duration getHoraTermino() {
+    public String getHoraTermino() {
         return this.horaTermino;
     }
 
-    public Eventos horaTermino(Duration horaTermino) {
+    public Eventos horaTermino(String horaTermino) {
         this.setHoraTermino(horaTermino);
         return this;
     }
 
-    public void setHoraTermino(Duration horaTermino) {
+    public void setHoraTermino(String horaTermino) {
         this.horaTermino = horaTermino;
     }
 

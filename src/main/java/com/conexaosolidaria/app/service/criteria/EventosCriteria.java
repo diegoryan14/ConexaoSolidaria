@@ -28,9 +28,9 @@ public class EventosCriteria implements Serializable, Criteria {
 
     private InstantFilter data;
 
-    private DurationFilter horaInicio;
+    private StringFilter horaInicio;
 
-    private DurationFilter horaTermino;
+    private StringFilter horaTermino;
 
     private StringFilter observacao;
 
@@ -44,8 +44,8 @@ public class EventosCriteria implements Serializable, Criteria {
         this.id = other.optionalId().map(LongFilter::copy).orElse(null);
         this.nome = other.optionalNome().map(StringFilter::copy).orElse(null);
         this.data = other.optionalData().map(InstantFilter::copy).orElse(null);
-        this.horaInicio = other.optionalHoraInicio().map(DurationFilter::copy).orElse(null);
-        this.horaTermino = other.optionalHoraTermino().map(DurationFilter::copy).orElse(null);
+        this.horaInicio = other.optionalHoraInicio().map(StringFilter::copy).orElse(null);
+        this.horaTermino = other.optionalHoraTermino().map(StringFilter::copy).orElse(null);
         this.observacao = other.optionalObservacao().map(StringFilter::copy).orElse(null);
         this.usuarioId = other.optionalUsuarioId().map(LongFilter::copy).orElse(null);
         this.distinct = other.distinct;
@@ -113,41 +113,41 @@ public class EventosCriteria implements Serializable, Criteria {
         this.data = data;
     }
 
-    public DurationFilter getHoraInicio() {
+    public StringFilter getHoraInicio() {
         return horaInicio;
     }
 
-    public Optional<DurationFilter> optionalHoraInicio() {
+    public Optional<StringFilter> optionalHoraInicio() {
         return Optional.ofNullable(horaInicio);
     }
 
-    public DurationFilter horaInicio() {
+    public StringFilter horaInicio() {
         if (horaInicio == null) {
-            setHoraInicio(new DurationFilter());
+            setHoraInicio(new StringFilter());
         }
         return horaInicio;
     }
 
-    public void setHoraInicio(DurationFilter horaInicio) {
+    public void setHoraInicio(StringFilter horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public DurationFilter getHoraTermino() {
+    public StringFilter getHoraTermino() {
         return horaTermino;
     }
 
-    public Optional<DurationFilter> optionalHoraTermino() {
+    public Optional<StringFilter> optionalHoraTermino() {
         return Optional.ofNullable(horaTermino);
     }
 
-    public DurationFilter horaTermino() {
+    public StringFilter horaTermino() {
         if (horaTermino == null) {
-            setHoraTermino(new DurationFilter());
+            setHoraTermino(new StringFilter());
         }
         return horaTermino;
     }
 
-    public void setHoraTermino(DurationFilter horaTermino) {
+    public void setHoraTermino(StringFilter horaTermino) {
         this.horaTermino = horaTermino;
     }
 

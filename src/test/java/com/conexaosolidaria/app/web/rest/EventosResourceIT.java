@@ -15,7 +15,6 @@ import com.conexaosolidaria.app.repository.EventosRepository;
 import com.conexaosolidaria.app.service.EventosService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
-import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -50,13 +49,11 @@ class EventosResourceIT {
     private static final Instant DEFAULT_DATA = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_DATA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final Duration DEFAULT_HORA_INICIO = Duration.ofHours(6);
-    private static final Duration UPDATED_HORA_INICIO = Duration.ofHours(12);
-    private static final Duration SMALLER_HORA_INICIO = Duration.ofHours(5);
+    private static final String DEFAULT_HORA_INICIO = "AAAAAAAAAA";
+    private static final String UPDATED_HORA_INICIO = "BBBBBBBBBB";
 
-    private static final Duration DEFAULT_HORA_TERMINO = Duration.ofHours(6);
-    private static final Duration UPDATED_HORA_TERMINO = Duration.ofHours(12);
-    private static final Duration SMALLER_HORA_TERMINO = Duration.ofHours(5);
+    private static final String DEFAULT_HORA_TERMINO = "AAAAAAAAAA";
+    private static final String UPDATED_HORA_TERMINO = "BBBBBBBBBB";
 
     private static final String DEFAULT_OBSERVACAO = "AAAAAAAAAA";
     private static final String UPDATED_OBSERVACAO = "BBBBBBBBBB";
@@ -175,8 +172,8 @@ class EventosResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(eventos.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
             .andExpect(jsonPath("$.[*].data").value(hasItem(DEFAULT_DATA.toString())))
-            .andExpect(jsonPath("$.[*].horaInicio").value(hasItem(DEFAULT_HORA_INICIO.toString())))
-            .andExpect(jsonPath("$.[*].horaTermino").value(hasItem(DEFAULT_HORA_TERMINO.toString())))
+            .andExpect(jsonPath("$.[*].horaInicio").value(hasItem(DEFAULT_HORA_INICIO)))
+            .andExpect(jsonPath("$.[*].horaTermino").value(hasItem(DEFAULT_HORA_TERMINO)))
             .andExpect(jsonPath("$.[*].observacao").value(hasItem(DEFAULT_OBSERVACAO)));
     }
 
@@ -211,8 +208,8 @@ class EventosResourceIT {
             .andExpect(jsonPath("$.id").value(eventos.getId().intValue()))
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME))
             .andExpect(jsonPath("$.data").value(DEFAULT_DATA.toString()))
-            .andExpect(jsonPath("$.horaInicio").value(DEFAULT_HORA_INICIO.toString()))
-            .andExpect(jsonPath("$.horaTermino").value(DEFAULT_HORA_TERMINO.toString()))
+            .andExpect(jsonPath("$.horaInicio").value(DEFAULT_HORA_INICIO))
+            .andExpect(jsonPath("$.horaTermino").value(DEFAULT_HORA_TERMINO))
             .andExpect(jsonPath("$.observacao").value(DEFAULT_OBSERVACAO));
     }
 
@@ -343,45 +340,22 @@ class EventosResourceIT {
 
     @Test
     @Transactional
-    void getAllEventosByHoraInicioIsGreaterThanOrEqualToSomething() throws Exception {
+    void getAllEventosByHoraInicioContainsSomething() throws Exception {
         // Initialize the database
         eventosRepository.saveAndFlush(eventos);
 
-        // Get all the eventosList where horaInicio is greater than or equal to
-        defaultEventosFiltering(
-            "horaInicio.greaterThanOrEqual=" + DEFAULT_HORA_INICIO,
-            "horaInicio.greaterThanOrEqual=" + UPDATED_HORA_INICIO
-        );
+        // Get all the eventosList where horaInicio contains
+        defaultEventosFiltering("horaInicio.contains=" + DEFAULT_HORA_INICIO, "horaInicio.contains=" + UPDATED_HORA_INICIO);
     }
 
     @Test
     @Transactional
-    void getAllEventosByHoraInicioIsLessThanOrEqualToSomething() throws Exception {
+    void getAllEventosByHoraInicioNotContainsSomething() throws Exception {
         // Initialize the database
         eventosRepository.saveAndFlush(eventos);
 
-        // Get all the eventosList where horaInicio is less than or equal to
-        defaultEventosFiltering("horaInicio.lessThanOrEqual=" + DEFAULT_HORA_INICIO, "horaInicio.lessThanOrEqual=" + SMALLER_HORA_INICIO);
-    }
-
-    @Test
-    @Transactional
-    void getAllEventosByHoraInicioIsLessThanSomething() throws Exception {
-        // Initialize the database
-        eventosRepository.saveAndFlush(eventos);
-
-        // Get all the eventosList where horaInicio is less than
-        defaultEventosFiltering("horaInicio.lessThan=" + UPDATED_HORA_INICIO, "horaInicio.lessThan=" + DEFAULT_HORA_INICIO);
-    }
-
-    @Test
-    @Transactional
-    void getAllEventosByHoraInicioIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        eventosRepository.saveAndFlush(eventos);
-
-        // Get all the eventosList where horaInicio is greater than
-        defaultEventosFiltering("horaInicio.greaterThan=" + SMALLER_HORA_INICIO, "horaInicio.greaterThan=" + DEFAULT_HORA_INICIO);
+        // Get all the eventosList where horaInicio does not contain
+        defaultEventosFiltering("horaInicio.doesNotContain=" + UPDATED_HORA_INICIO, "horaInicio.doesNotContain=" + DEFAULT_HORA_INICIO);
     }
 
     @Test
@@ -419,48 +393,22 @@ class EventosResourceIT {
 
     @Test
     @Transactional
-    void getAllEventosByHoraTerminoIsGreaterThanOrEqualToSomething() throws Exception {
+    void getAllEventosByHoraTerminoContainsSomething() throws Exception {
         // Initialize the database
         eventosRepository.saveAndFlush(eventos);
 
-        // Get all the eventosList where horaTermino is greater than or equal to
-        defaultEventosFiltering(
-            "horaTermino.greaterThanOrEqual=" + DEFAULT_HORA_TERMINO,
-            "horaTermino.greaterThanOrEqual=" + UPDATED_HORA_TERMINO
-        );
+        // Get all the eventosList where horaTermino contains
+        defaultEventosFiltering("horaTermino.contains=" + DEFAULT_HORA_TERMINO, "horaTermino.contains=" + UPDATED_HORA_TERMINO);
     }
 
     @Test
     @Transactional
-    void getAllEventosByHoraTerminoIsLessThanOrEqualToSomething() throws Exception {
+    void getAllEventosByHoraTerminoNotContainsSomething() throws Exception {
         // Initialize the database
         eventosRepository.saveAndFlush(eventos);
 
-        // Get all the eventosList where horaTermino is less than or equal to
-        defaultEventosFiltering(
-            "horaTermino.lessThanOrEqual=" + DEFAULT_HORA_TERMINO,
-            "horaTermino.lessThanOrEqual=" + SMALLER_HORA_TERMINO
-        );
-    }
-
-    @Test
-    @Transactional
-    void getAllEventosByHoraTerminoIsLessThanSomething() throws Exception {
-        // Initialize the database
-        eventosRepository.saveAndFlush(eventos);
-
-        // Get all the eventosList where horaTermino is less than
-        defaultEventosFiltering("horaTermino.lessThan=" + UPDATED_HORA_TERMINO, "horaTermino.lessThan=" + DEFAULT_HORA_TERMINO);
-    }
-
-    @Test
-    @Transactional
-    void getAllEventosByHoraTerminoIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        eventosRepository.saveAndFlush(eventos);
-
-        // Get all the eventosList where horaTermino is greater than
-        defaultEventosFiltering("horaTermino.greaterThan=" + SMALLER_HORA_TERMINO, "horaTermino.greaterThan=" + DEFAULT_HORA_TERMINO);
+        // Get all the eventosList where horaTermino does not contain
+        defaultEventosFiltering("horaTermino.doesNotContain=" + UPDATED_HORA_TERMINO, "horaTermino.doesNotContain=" + DEFAULT_HORA_TERMINO);
     }
 
     @Test
@@ -551,8 +499,8 @@ class EventosResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(eventos.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
             .andExpect(jsonPath("$.[*].data").value(hasItem(DEFAULT_DATA.toString())))
-            .andExpect(jsonPath("$.[*].horaInicio").value(hasItem(DEFAULT_HORA_INICIO.toString())))
-            .andExpect(jsonPath("$.[*].horaTermino").value(hasItem(DEFAULT_HORA_TERMINO.toString())))
+            .andExpect(jsonPath("$.[*].horaInicio").value(hasItem(DEFAULT_HORA_INICIO)))
+            .andExpect(jsonPath("$.[*].horaTermino").value(hasItem(DEFAULT_HORA_TERMINO)))
             .andExpect(jsonPath("$.[*].observacao").value(hasItem(DEFAULT_OBSERVACAO)));
 
         // Check, that the count call also returns 1

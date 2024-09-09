@@ -79,10 +79,10 @@ public class EventosQueryService extends QueryService<Eventos> {
                 specification = specification.and(buildRangeSpecification(criteria.getData(), Eventos_.data));
             }
             if (criteria.getHoraInicio() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getHoraInicio(), Eventos_.horaInicio));
+                specification = specification.and(buildStringSpecification(criteria.getHoraInicio(), Eventos_.horaInicio));
             }
             if (criteria.getHoraTermino() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getHoraTermino(), Eventos_.horaTermino));
+                specification = specification.and(buildStringSpecification(criteria.getHoraTermino(), Eventos_.horaTermino));
             }
             if (criteria.getObservacao() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getObservacao(), Eventos_.observacao));

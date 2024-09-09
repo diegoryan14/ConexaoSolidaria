@@ -20,10 +20,10 @@
             <column name="data" type="${datetimeType}">
                 <constraints nullable="true" />
             </column>
-            <column name="hora_inicio" type="bigint">
+            <column name="hora_inicio" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            <column name="hora_termino" type="bigint">
+            <column name="hora_termino" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
             <column name="observacao" type="varchar(255)">
@@ -56,8 +56,8 @@
             <column name="id" type="numeric"/>
             <column name="nome" type="string"/>
             <column name="data" type="date"/>
-            <column name="hora_inicio" type="numeric"/>
-            <column name="hora_termino" type="numeric"/>
+            <column name="hora_inicio" type="string"/>
+            <column name="hora_termino" type="string"/>
             <column name="observacao" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
         </loadData>

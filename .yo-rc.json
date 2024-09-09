@@ -9,6 +9,7 @@
     "clientFramework": "angular",
     "clientPackageManager": "npm",
     "clientTheme": "flatly",
+    "creationTimestamp": 1725886955042,
     "databaseType": "sql",
     "devDatabaseType": "mysql",
     "devServerPort": 4200,

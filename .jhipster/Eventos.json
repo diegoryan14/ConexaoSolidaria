@@ -14,11 +14,11 @@
     },
     {
       "fieldName": "horaInicio",
-      "fieldType": "Duration"
+      "fieldType": "String"
     },
     {
       "fieldName": "horaTermino",
-      "fieldType": "Duration"
+      "fieldType": "String"
     },
     {
       "fieldName": "observacao",

@@ -9,17 +9,17 @@ export const sampleWithRequiredData: IEventos = {
 export const sampleWithPartialData: IEventos = {
   id: 25802,
   nome: 'panic what reasonable',
-  horaTermino: '31824',
-  observacao: 'qua depressurize with',
+  horaTermino: 'properly provided within',
+  observacao: 'colloquy daily woot',
 };
 
 export const sampleWithFullData: IEventos = {
-  id: 7473,
-  nome: 'that',
-  data: dayjs('2024-09-08T18:08'),
-  horaInicio: '22702',
-  horaTermino: '27806',
-  observacao: 'insistent auction',
+  id: 16628,
+  nome: 'meh coop as',
+  data: dayjs('2024-09-08T18:02'),
+  horaInicio: 'stomach disaster than',
+  horaTermino: 'knight gee',
+  observacao: 'sonar finally anxious',
 };
 
 export const sampleWithNewData: NewEventos = {

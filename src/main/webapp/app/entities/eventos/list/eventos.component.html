@@ -96,8 +96,8 @@
               </td>
               <td>{{ eventos.nome }}</td>
               <td>{{ eventos.data | formatMediumDatetime }}</td>
-              <td title="{{ eventos.horaInicio }}">{{ eventos.horaInicio | duration }}</td>
-              <td title="{{ eventos.horaTermino }}">{{ eventos.horaTermino | duration }}</td>
+              <td>{{ eventos.horaInicio }}</td>
+              <td>{{ eventos.horaTermino }}</td>
               <td>{{ eventos.observacao }}</td>
               <td>
                 @if (eventos.usuario) {
