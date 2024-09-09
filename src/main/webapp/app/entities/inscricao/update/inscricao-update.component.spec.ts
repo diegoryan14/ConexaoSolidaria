@@ -75,10 +75,10 @@ describe('Inscricao Management Update Component', () => {
 
     it('Should call Eventos query and add missing value', () => {
       const inscricao: IInscricao = { id: 456 };
-      const evento: IEventos = { id: 27129 };
+      const evento: IEventos = { id: 5898 };
       inscricao.evento = evento;
 
-      const eventosCollection: IEventos[] = [{ id: 7860 }];
+      const eventosCollection: IEventos[] = [{ id: 8883 }];
       jest.spyOn(eventosService, 'query').mockReturnValue(of(new HttpResponse({ body: eventosCollection })));
       const additionalEventos = [evento];
       const expectedCollection: IEventos[] = [...additionalEventos, ...eventosCollection];
@@ -99,7 +99,7 @@ describe('Inscricao Management Update Component', () => {
       const inscricao: IInscricao = { id: 456 };
       const usuario: IUsuario = { id: 6949 };
       inscricao.usuario = usuario;
-      const evento: IEventos = { id: 16095 };
+      const evento: IEventos = { id: 1939 };
       inscricao.evento = evento;
 
       activatedRoute.data = of({ inscricao });

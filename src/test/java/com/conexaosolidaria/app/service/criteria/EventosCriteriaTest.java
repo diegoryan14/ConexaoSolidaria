@@ -76,7 +76,8 @@ class EventosCriteriaTest {
     private static void setAllFilters(EventosCriteria eventosCriteria) {
         eventosCriteria.id();
         eventosCriteria.nome();
-        eventosCriteria.data();
+        eventosCriteria.dataCadastro();
+        eventosCriteria.dataEvento();
         eventosCriteria.horaInicio();
         eventosCriteria.horaTermino();
         eventosCriteria.observacao();
@@ -89,7 +90,8 @@ class EventosCriteriaTest {
             criteria ->
                 condition.apply(criteria.getId()) &&
                 condition.apply(criteria.getNome()) &&
-                condition.apply(criteria.getData()) &&
+                condition.apply(criteria.getDataCadastro()) &&
+                condition.apply(criteria.getDataEvento()) &&
                 condition.apply(criteria.getHoraInicio()) &&
                 condition.apply(criteria.getHoraTermino()) &&
                 condition.apply(criteria.getObservacao()) &&
@@ -104,7 +106,8 @@ class EventosCriteriaTest {
             criteria ->
                 condition.apply(criteria.getId(), copy.getId()) &&
                 condition.apply(criteria.getNome(), copy.getNome()) &&
-                condition.apply(criteria.getData(), copy.getData()) &&
+                condition.apply(criteria.getDataCadastro(), copy.getDataCadastro()) &&
+                condition.apply(criteria.getDataEvento(), copy.getDataEvento()) &&
                 condition.apply(criteria.getHoraInicio(), copy.getHoraInicio()) &&
                 condition.apply(criteria.getHoraTermino(), copy.getHoraTermino()) &&
                 condition.apply(criteria.getObservacao(), copy.getObservacao()) &&

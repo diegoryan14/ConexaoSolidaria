@@ -46,8 +46,11 @@ class EventosResourceIT {
     private static final String DEFAULT_NOME = "AAAAAAAAAA";
     private static final String UPDATED_NOME = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_DATA = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_DATA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final Instant DEFAULT_DATA_CADASTRO = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATA_CADASTRO = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final Instant DEFAULT_DATA_EVENTO = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATA_EVENTO = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final String DEFAULT_HORA_INICIO = "AAAAAAAAAA";
     private static final String UPDATED_HORA_INICIO = "BBBBBBBBBB";
@@ -93,7 +96,8 @@ class EventosResourceIT {
     public static Eventos createEntity(EntityManager em) {
         Eventos eventos = new Eventos()
             .nome(DEFAULT_NOME)
-            .data(DEFAULT_DATA)
+            .dataCadastro(DEFAULT_DATA_CADASTRO)
+            .dataEvento(DEFAULT_DATA_EVENTO)
             .horaInicio(DEFAULT_HORA_INICIO)
             .horaTermino(DEFAULT_HORA_TERMINO)
             .observacao(DEFAULT_OBSERVACAO);
@@ -109,7 +113,8 @@ class EventosResourceIT {
     public static Eventos createUpdatedEntity(EntityManager em) {
         Eventos eventos = new Eventos()
             .nome(UPDATED_NOME)
-            .data(UPDATED_DATA)
+            .dataCadastro(UPDATED_DATA_CADASTRO)
+            .dataEvento(UPDATED_DATA_EVENTO)
             .horaInicio(UPDATED_HORA_INICIO)
             .horaTermino(UPDATED_HORA_TERMINO)
             .observacao(UPDATED_OBSERVACAO);
@@ -171,7 +176,8 @@ class EventosResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(eventos.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
-            .andExpect(jsonPath("$.[*].data").value(hasItem(DEFAULT_DATA.toString())))
+            .andExpect(jsonPath("$.[*].dataCadastro").value(hasItem(DEFAULT_DATA_CADASTRO.toString())))
+            .andExpect(jsonPath("$.[*].dataEvento").value(hasItem(DEFAULT_DATA_EVENTO.toString())))
             .andExpect(jsonPath("$.[*].horaInicio").value(hasItem(DEFAULT_HORA_INICIO)))
             .andExpect(jsonPath("$.[*].horaTermino").value(hasItem(DEFAULT_HORA_TERMINO)))
             .andExpect(jsonPath("$.[*].observacao").value(hasItem(DEFAULT_OBSERVACAO)));
@@ -207,7 +213,8 @@ class EventosResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(eventos.getId().intValue()))
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME))
-            .andExpect(jsonPath("$.data").value(DEFAULT_DATA.toString()))
+            .andExpect(jsonPath("$.dataCadastro").value(DEFAULT_DATA_CADASTRO.toString()))
+            .andExpect(jsonPath("$.dataEvento").value(DEFAULT_DATA_EVENTO.toString()))
             .andExpect(jsonPath("$.horaInicio").value(DEFAULT_HORA_INICIO))
             .andExpect(jsonPath("$.horaTermino").value(DEFAULT_HORA_TERMINO))
             .andExpect(jsonPath("$.observacao").value(DEFAULT_OBSERVACAO));
@@ -280,32 +287,65 @@ class EventosResourceIT {
 
     @Test
     @Transactional
-    void getAllEventosByDataIsEqualToSomething() throws Exception {
+    void getAllEventosByDataCadastroIsEqualToSomething() throws Exception {
         // Initialize the database
         eventosRepository.saveAndFlush(eventos);
 
-        // Get all the eventosList where data equals to
-        defaultEventosFiltering("data.equals=" + DEFAULT_DATA, "data.equals=" + UPDATED_DATA);
+        // Get all the eventosList where dataCadastro equals to
+        defaultEventosFiltering("dataCadastro.equals=" + DEFAULT_DATA_CADASTRO, "dataCadastro.equals=" + UPDATED_DATA_CADASTRO);
     }
 
     @Test
     @Transactional
-    void getAllEventosByDataIsInShouldWork() throws Exception {
+    void getAllEventosByDataCadastroIsInShouldWork() throws Exception {
         // Initialize the database
         eventosRepository.saveAndFlush(eventos);
 
-        // Get all the eventosList where data in
-        defaultEventosFiltering("data.in=" + DEFAULT_DATA + "," + UPDATED_DATA, "data.in=" + UPDATED_DATA);
+        // Get all the eventosList where dataCadastro in
+        defaultEventosFiltering(
+            "dataCadastro.in=" + DEFAULT_DATA_CADASTRO + "," + UPDATED_DATA_CADASTRO,
+            "dataCadastro.in=" + UPDATED_DATA_CADASTRO
+        );
     }
 
     @Test
     @Transactional
-    void getAllEventosByDataIsNullOrNotNull() throws Exception {
+    void getAllEventosByDataCadastroIsNullOrNotNull() throws Exception {
         // Initialize the database
         eventosRepository.saveAndFlush(eventos);
 
-        // Get all the eventosList where data is not null
-        defaultEventosFiltering("data.specified=true", "data.specified=false");
+        // Get all the eventosList where dataCadastro is not null
+        defaultEventosFiltering("dataCadastro.specified=true", "dataCadastro.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllEventosByDataEventoIsEqualToSomething() throws Exception {
+        // Initialize the database
+        eventosRepository.saveAndFlush(eventos);
+
+        // Get all the eventosList where dataEvento equals to
+        defaultEventosFiltering("dataEvento.equals=" + DEFAULT_DATA_EVENTO, "dataEvento.equals=" + UPDATED_DATA_EVENTO);
+    }
+
+    @Test
+    @Transactional
+    void getAllEventosByDataEventoIsInShouldWork() throws Exception {
+        // Initialize the database
+        eventosRepository.saveAndFlush(eventos);
+
+        // Get all the eventosList where dataEvento in
+        defaultEventosFiltering("dataEvento.in=" + DEFAULT_DATA_EVENTO + "," + UPDATED_DATA_EVENTO, "dataEvento.in=" + UPDATED_DATA_EVENTO);
+    }
+
+    @Test
+    @Transactional
+    void getAllEventosByDataEventoIsNullOrNotNull() throws Exception {
+        // Initialize the database
+        eventosRepository.saveAndFlush(eventos);
+
+        // Get all the eventosList where dataEvento is not null
+        defaultEventosFiltering("dataEvento.specified=true", "dataEvento.specified=false");
     }
 
     @Test
@@ -498,7 +538,8 @@ class EventosResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(eventos.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
-            .andExpect(jsonPath("$.[*].data").value(hasItem(DEFAULT_DATA.toString())))
+            .andExpect(jsonPath("$.[*].dataCadastro").value(hasItem(DEFAULT_DATA_CADASTRO.toString())))
+            .andExpect(jsonPath("$.[*].dataEvento").value(hasItem(DEFAULT_DATA_EVENTO.toString())))
             .andExpect(jsonPath("$.[*].horaInicio").value(hasItem(DEFAULT_HORA_INICIO)))
             .andExpect(jsonPath("$.[*].horaTermino").value(hasItem(DEFAULT_HORA_TERMINO)))
             .andExpect(jsonPath("$.[*].observacao").value(hasItem(DEFAULT_OBSERVACAO)));
@@ -551,7 +592,8 @@ class EventosResourceIT {
         em.detach(updatedEventos);
         updatedEventos
             .nome(UPDATED_NOME)
-            .data(UPDATED_DATA)
+            .dataCadastro(UPDATED_DATA_CADASTRO)
+            .dataEvento(UPDATED_DATA_EVENTO)
             .horaInicio(UPDATED_HORA_INICIO)
             .horaTermino(UPDATED_HORA_TERMINO)
             .observacao(UPDATED_OBSERVACAO);
@@ -630,7 +672,7 @@ class EventosResourceIT {
         Eventos partialUpdatedEventos = new Eventos();
         partialUpdatedEventos.setId(eventos.getId());
 
-        partialUpdatedEventos.horaTermino(UPDATED_HORA_TERMINO);
+        partialUpdatedEventos.horaInicio(UPDATED_HORA_INICIO).observacao(UPDATED_OBSERVACAO);
 
         restEventosMockMvc
             .perform(
@@ -660,7 +702,8 @@ class EventosResourceIT {
 
         partialUpdatedEventos
             .nome(UPDATED_NOME)
-            .data(UPDATED_DATA)
+            .dataCadastro(UPDATED_DATA_CADASTRO)
+            .dataEvento(UPDATED_DATA_EVENTO)
             .horaInicio(UPDATED_HORA_INICIO)
             .horaTermino(UPDATED_HORA_TERMINO)
             .observacao(UPDATED_OBSERVACAO);

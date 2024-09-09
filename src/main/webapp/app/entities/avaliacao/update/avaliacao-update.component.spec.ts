@@ -75,10 +75,10 @@ describe('Avaliacao Management Update Component', () => {
 
     it('Should call Eventos query and add missing value', () => {
       const avaliacao: IAvaliacao = { id: 456 };
-      const evento: IEventos = { id: 10651 };
+      const evento: IEventos = { id: 17345 };
       avaliacao.evento = evento;
 
-      const eventosCollection: IEventos[] = [{ id: 31345 }];
+      const eventosCollection: IEventos[] = [{ id: 22024 }];
       jest.spyOn(eventosService, 'query').mockReturnValue(of(new HttpResponse({ body: eventosCollection })));
       const additionalEventos = [evento];
       const expectedCollection: IEventos[] = [...additionalEventos, ...eventosCollection];
@@ -99,7 +99,7 @@ describe('Avaliacao Management Update Component', () => {
       const avaliacao: IAvaliacao = { id: 456 };
       const usuario: IUsuario = { id: 19156 };
       avaliacao.usuario = usuario;
-      const evento: IEventos = { id: 14644 };
+      const evento: IEventos = { id: 13976 };
       avaliacao.evento = evento;
 
       activatedRoute.data = of({ avaliacao });

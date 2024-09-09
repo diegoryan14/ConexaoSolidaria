@@ -11,8 +11,9 @@ import { IEventos, NewEventos } from '../eventos.model';
 
 export type PartialUpdateEventos = Partial<IEventos> & Pick<IEventos, 'id'>;
 
-type RestOf<T extends IEventos | NewEventos> = Omit<T, 'data'> & {
-  data?: string | null;
+type RestOf<T extends IEventos | NewEventos> = Omit<T, 'dataCadastro' | 'dataEvento'> & {
+  dataCadastro?: string | null;
+  dataEvento?: string | null;
 };
 
 export type RestEventos = RestOf<IEventos>;
@@ -100,14 +101,16 @@ export class EventosService {
   protected convertDateFromClient<T extends IEventos | NewEventos | PartialUpdateEventos>(eventos: T): RestOf<T> {
     return {
       ...eventos,
-      data: eventos.data?.toJSON() ?? null,
+      dataCadastro: eventos.dataCadastro?.toJSON() ?? null,
+      dataEvento: eventos.dataEvento?.toJSON() ?? null,
     };
   }
 
   protected convertDateFromServer(restEventos: RestEventos): IEventos {
     return {
       ...restEventos,
-      data: restEventos.data ? dayjs(restEventos.data) : undefined,
+      dataCadastro: restEventos.dataCadastro ? dayjs(restEventos.dataCadastro) : undefined,
+      dataEvento: restEventos.dataEvento ? dayjs(restEventos.dataEvento) : undefined,
     };
   }
 

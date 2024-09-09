@@ -8,7 +8,8 @@ import { EventosService, RestEventos } from './eventos.service';
 
 const requireRestSample: RestEventos = {
   ...sampleWithRequiredData,
-  data: sampleWithRequiredData.data?.toJSON(),
+  dataCadastro: sampleWithRequiredData.dataCadastro?.toJSON(),
+  dataEvento: sampleWithRequiredData.dataEvento?.toJSON(),
 };
 
 describe('Eventos Service', () => {

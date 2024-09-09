@@ -26,7 +26,9 @@ public class EventosCriteria implements Serializable, Criteria {
 
     private StringFilter nome;
 
-    private InstantFilter data;
+    private InstantFilter dataCadastro;
+
+    private InstantFilter dataEvento;
 
     private StringFilter horaInicio;
 
@@ -43,7 +45,8 @@ public class EventosCriteria implements Serializable, Criteria {
     public EventosCriteria(EventosCriteria other) {
         this.id = other.optionalId().map(LongFilter::copy).orElse(null);
         this.nome = other.optionalNome().map(StringFilter::copy).orElse(null);
-        this.data = other.optionalData().map(InstantFilter::copy).orElse(null);
+        this.dataCadastro = other.optionalDataCadastro().map(InstantFilter::copy).orElse(null);
+        this.dataEvento = other.optionalDataEvento().map(InstantFilter::copy).orElse(null);
         this.horaInicio = other.optionalHoraInicio().map(StringFilter::copy).orElse(null);
         this.horaTermino = other.optionalHoraTermino().map(StringFilter::copy).orElse(null);
         this.observacao = other.optionalObservacao().map(StringFilter::copy).orElse(null);
@@ -94,23 +97,42 @@ public class EventosCriteria implements Serializable, Criteria {
         this.nome = nome;
     }
 
-    public InstantFilter getData() {
-        return data;
+    public InstantFilter getDataCadastro() {
+        return dataCadastro;
     }
 
-    public Optional<InstantFilter> optionalData() {
-        return Optional.ofNullable(data);
+    public Optional<InstantFilter> optionalDataCadastro() {
+        return Optional.ofNullable(dataCadastro);
     }
 
-    public InstantFilter data() {
-        if (data == null) {
-            setData(new InstantFilter());
+    public InstantFilter dataCadastro() {
+        if (dataCadastro == null) {
+            setDataCadastro(new InstantFilter());
         }
-        return data;
+        return dataCadastro;
     }
 
-    public void setData(InstantFilter data) {
-        this.data = data;
+    public void setDataCadastro(InstantFilter dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public InstantFilter getDataEvento() {
+        return dataEvento;
+    }
+
+    public Optional<InstantFilter> optionalDataEvento() {
+        return Optional.ofNullable(dataEvento);
+    }
+
+    public InstantFilter dataEvento() {
+        if (dataEvento == null) {
+            setDataEvento(new InstantFilter());
+        }
+        return dataEvento;
+    }
+
+    public void setDataEvento(InstantFilter dataEvento) {
+        this.dataEvento = dataEvento;
     }
 
     public StringFilter getHoraInicio() {
@@ -220,7 +242,8 @@ public class EventosCriteria implements Serializable, Criteria {
         return (
             Objects.equals(id, that.id) &&
             Objects.equals(nome, that.nome) &&
-            Objects.equals(data, that.data) &&
+            Objects.equals(dataCadastro, that.dataCadastro) &&
+            Objects.equals(dataEvento, that.dataEvento) &&
             Objects.equals(horaInicio, that.horaInicio) &&
             Objects.equals(horaTermino, that.horaTermino) &&
             Objects.equals(observacao, that.observacao) &&
@@ -231,7 +254,7 @@ public class EventosCriteria implements Serializable, Criteria {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, data, horaInicio, horaTermino, observacao, usuarioId, distinct);
+        return Objects.hash(id, nome, dataCadastro, dataEvento, horaInicio, horaTermino, observacao, usuarioId, distinct);
     }
 
     // prettier-ignore
@@ -240,7 +263,8 @@ public class EventosCriteria implements Serializable, Criteria {
         return "EventosCriteria{" +
             optionalId().map(f -> "id=" + f + ", ").orElse("") +
             optionalNome().map(f -> "nome=" + f + ", ").orElse("") +
-            optionalData().map(f -> "data=" + f + ", ").orElse("") +
+            optionalDataCadastro().map(f -> "dataCadastro=" + f + ", ").orElse("") +
+            optionalDataEvento().map(f -> "dataEvento=" + f + ", ").orElse("") +
             optionalHoraInicio().map(f -> "horaInicio=" + f + ", ").orElse("") +
             optionalHoraTermino().map(f -> "horaTermino=" + f + ", ").orElse("") +
             optionalObservacao().map(f -> "observacao=" + f + ", ").orElse("") +

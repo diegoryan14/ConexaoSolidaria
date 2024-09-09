@@ -19,20 +19,22 @@ type EventosFormGroupInput = IEventos | PartialWithRequiredKeyOf<NewEventos>;
 /**
  * Type that converts some properties for forms.
  */
-type FormValueOf<T extends IEventos | NewEventos> = Omit<T, 'data'> & {
-  data?: string | null;
+type FormValueOf<T extends IEventos | NewEventos> = Omit<T, 'dataCadastro' | 'dataEvento'> & {
+  dataCadastro?: string | null;
+  dataEvento?: string | null;
 };
 
 type EventosFormRawValue = FormValueOf<IEventos>;
 
 type NewEventosFormRawValue = FormValueOf<NewEventos>;
 
-type EventosFormDefaults = Pick<NewEventos, 'id' | 'data'>;
+type EventosFormDefaults = Pick<NewEventos, 'id' | 'dataCadastro' | 'dataEvento'>;
 
 type EventosFormGroupContent = {
   id: FormControl<EventosFormRawValue['id'] | NewEventos['id']>;
   nome: FormControl<EventosFormRawValue['nome']>;
-  data: FormControl<EventosFormRawValue['data']>;
+  dataCadastro: FormControl<EventosFormRawValue['dataCadastro']>;
+  dataEvento: FormControl<EventosFormRawValue['dataEvento']>;
   horaInicio: FormControl<EventosFormRawValue['horaInicio']>;
   horaTermino: FormControl<EventosFormRawValue['horaTermino']>;
   observacao: FormControl<EventosFormRawValue['observacao']>;
@@ -57,7 +59,8 @@ export class EventosFormService {
         },
       ),
       nome: new FormControl(eventosRawValue.nome),
-      data: new FormControl(eventosRawValue.data),
+      dataCadastro: new FormControl(eventosRawValue.dataCadastro),
+      dataEvento: new FormControl(eventosRawValue.dataEvento),
       horaInicio: new FormControl(eventosRawValue.horaInicio),
       horaTermino: new FormControl(eventosRawValue.horaTermino),
       observacao: new FormControl(eventosRawValue.observacao),
@@ -84,14 +87,16 @@ export class EventosFormService {
 
     return {
       id: null,
-      data: currentTime,
+      dataCadastro: currentTime,
+      dataEvento: currentTime,
     };
   }
 
   private convertEventosRawValueToEventos(rawEventos: EventosFormRawValue | NewEventosFormRawValue): IEventos | NewEventos {
     return {
       ...rawEventos,
-      data: dayjs(rawEventos.data, DATE_TIME_FORMAT),
+      dataCadastro: dayjs(rawEventos.dataCadastro, DATE_TIME_FORMAT),
+      dataEvento: dayjs(rawEventos.dataEvento, DATE_TIME_FORMAT),
     };
   }
 
@@ -100,7 +105,8 @@ export class EventosFormService {
   ): EventosFormRawValue | PartialWithRequiredKeyOf<NewEventosFormRawValue> {
     return {
       ...eventos,
-      data: eventos.data ? eventos.data.format(DATE_TIME_FORMAT) : undefined,
+      dataCadastro: eventos.dataCadastro ? eventos.dataCadastro.format(DATE_TIME_FORMAT) : undefined,
+      dataEvento: eventos.dataEvento ? eventos.dataEvento.format(DATE_TIME_FORMAT) : undefined,
     };
   }
 }

@@ -48,7 +48,8 @@ public class EventosAsserts {
         assertThat(expected)
             .as("Verify Eventos relevant properties")
             .satisfies(e -> assertThat(e.getNome()).as("check nome").isEqualTo(actual.getNome()))
-            .satisfies(e -> assertThat(e.getData()).as("check data").isEqualTo(actual.getData()))
+            .satisfies(e -> assertThat(e.getDataCadastro()).as("check dataCadastro").isEqualTo(actual.getDataCadastro()))
+            .satisfies(e -> assertThat(e.getDataEvento()).as("check dataEvento").isEqualTo(actual.getDataEvento()))
             .satisfies(e -> assertThat(e.getHoraInicio()).as("check horaInicio").isEqualTo(actual.getHoraInicio()))
             .satisfies(e -> assertThat(e.getHoraTermino()).as("check horaTermino").isEqualTo(actual.getHoraTermino()))
             .satisfies(e -> assertThat(e.getObservacao()).as("check observacao").isEqualTo(actual.getObservacao()));

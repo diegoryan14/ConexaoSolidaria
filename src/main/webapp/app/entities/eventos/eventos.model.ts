@@ -4,7 +4,8 @@ import { IUsuario } from 'app/entities/usuario/usuario.model';
 export interface IEventos {
   id: number;
   nome?: string | null;
-  data?: dayjs.Dayjs | null;
+  dataCadastro?: dayjs.Dayjs | null;
+  dataEvento?: dayjs.Dayjs | null;
   horaInicio?: string | null;
   horaTermino?: string | null;
   observacao?: string | null;

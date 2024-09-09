@@ -43,7 +43,8 @@ enum Ativo {
 
 entity Eventos {
     nome String,
-    data Instant,
+    dataCadastro Instant,
+    dataEvento Instant,
     horaInicio String,
     horaTermino String,
     observacao String

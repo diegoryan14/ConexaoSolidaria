@@ -3,23 +3,23 @@ import dayjs from 'dayjs/esm';
 import { IEventos, NewEventos } from './eventos.model';
 
 export const sampleWithRequiredData: IEventos = {
-  id: 15371,
+  id: 11418,
 };
 
 export const sampleWithPartialData: IEventos = {
-  id: 25802,
-  nome: 'panic what reasonable',
-  horaTermino: 'properly provided within',
-  observacao: 'colloquy daily woot',
+  id: 16596,
+  dataEvento: dayjs('2024-09-09T01:42'),
+  horaInicio: 'cut',
 };
 
 export const sampleWithFullData: IEventos = {
-  id: 16628,
-  nome: 'meh coop as',
-  data: dayjs('2024-09-08T18:02'),
-  horaInicio: 'stomach disaster than',
-  horaTermino: 'knight gee',
-  observacao: 'sonar finally anxious',
+  id: 11754,
+  nome: 'sans',
+  dataCadastro: dayjs('2024-09-08T13:58'),
+  dataEvento: dayjs('2024-09-08T20:06'),
+  horaInicio: 'properly provided within',
+  horaTermino: 'colloquy daily woot',
+  observacao: 'supposing tablecloth',
 };
 
 export const sampleWithNewData: NewEventos = {

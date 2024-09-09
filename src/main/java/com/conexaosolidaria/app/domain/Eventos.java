@@ -25,8 +25,11 @@ public class Eventos implements Serializable {
     @Column(name = "nome")
     private String nome;
 
-    @Column(name = "data")
-    private Instant data;
+    @Column(name = "data_cadastro")
+    private Instant dataCadastro;
+
+    @Column(name = "data_evento")
+    private Instant dataEvento;
 
     @Column(name = "hora_inicio")
     private String horaInicio;
@@ -68,17 +71,30 @@ public class Eventos implements Serializable {
         this.nome = nome;
     }
 
-    public Instant getData() {
-        return this.data;
+    public Instant getDataCadastro() {
+        return this.dataCadastro;
     }
 
-    public Eventos data(Instant data) {
-        this.setData(data);
+    public Eventos dataCadastro(Instant dataCadastro) {
+        this.setDataCadastro(dataCadastro);
         return this;
     }
 
-    public void setData(Instant data) {
-        this.data = data;
+    public void setDataCadastro(Instant dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public Instant getDataEvento() {
+        return this.dataEvento;
+    }
+
+    public Eventos dataEvento(Instant dataEvento) {
+        this.setDataEvento(dataEvento);
+        return this;
+    }
+
+    public void setDataEvento(Instant dataEvento) {
+        this.dataEvento = dataEvento;
     }
 
     public String getHoraInicio() {
@@ -158,7 +174,8 @@ public class Eventos implements Serializable {
         return "Eventos{" +
             "id=" + getId() +
             ", nome='" + getNome() + "'" +
-            ", data='" + getData() + "'" +
+            ", dataCadastro='" + getDataCadastro() + "'" +
+            ", dataEvento='" + getDataEvento() + "'" +
             ", horaInicio='" + getHoraInicio() + "'" +
             ", horaTermino='" + getHoraTermino() + "'" +
             ", observacao='" + getObservacao() + "'" +

@@ -19,9 +19,13 @@
           <dd>
             <span>{{ eventos()!.nome }}</span>
           </dd>
-          <dt><span appTranslate="conexaoSolidariaApp.eventos.data">Data</span></dt>
+          <dt><span appTranslate="conexaoSolidariaApp.eventos.dataCadastro">Data Cadastro</span></dt>
           <dd>
-            <span>{{ eventos()!.data | formatMediumDatetime }}</span>
+            <span>{{ eventos()!.dataCadastro | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.eventos.dataEvento">Data Evento</span></dt>
+          <dd>
+            <span>{{ eventos()!.dataEvento | formatMediumDatetime }}</span>
           </dd>
           <dt><span appTranslate="conexaoSolidariaApp.eventos.horaInicio">Hora Inicio</span></dt>
           <dd>

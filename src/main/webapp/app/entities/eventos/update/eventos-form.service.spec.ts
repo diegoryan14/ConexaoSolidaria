@@ -21,7 +21,8 @@ describe('Eventos Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             nome: expect.any(Object),
-            data: expect.any(Object),
+            dataCadastro: expect.any(Object),
+            dataEvento: expect.any(Object),
             horaInicio: expect.any(Object),
             horaTermino: expect.any(Object),
             observacao: expect.any(Object),
@@ -37,7 +38,8 @@ describe('Eventos Form Service', () => {
           expect.objectContaining({
             id: expect.any(Object),
             nome: expect.any(Object),
-            data: expect.any(Object),
+            dataCadastro: expect.any(Object),
+            dataEvento: expect.any(Object),
             horaInicio: expect.any(Object),
             horaTermino: expect.any(Object),
             observacao: expect.any(Object),

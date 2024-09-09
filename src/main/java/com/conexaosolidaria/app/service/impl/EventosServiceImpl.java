@@ -48,8 +48,11 @@ public class EventosServiceImpl implements EventosService {
                 if (eventos.getNome() != null) {
                     existingEventos.setNome(eventos.getNome());
                 }
-                if (eventos.getData() != null) {
-                    existingEventos.setData(eventos.getData());
+                if (eventos.getDataCadastro() != null) {
+                    existingEventos.setDataCadastro(eventos.getDataCadastro());
+                }
+                if (eventos.getDataEvento() != null) {
+                    existingEventos.setDataEvento(eventos.getDataEvento());
                 }
                 if (eventos.getHoraInicio() != null) {
                     existingEventos.setHoraInicio(eventos.getHoraInicio());

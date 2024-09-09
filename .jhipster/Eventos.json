@@ -9,7 +9,11 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "data",
+      "fieldName": "dataCadastro",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dataEvento",
       "fieldType": "Instant"
     },
     {
