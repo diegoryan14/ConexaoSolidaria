@@ -1,0 +1,29 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 0,
+    "applicationType": "monolith",
+    "authenticationType": "jwt",
+    "baseName": "ConexaoSolidaria",
+    "buildTool": "gradle",
+    "cacheProvider": "caffeine",
+    "clientFramework": "angular",
+    "clientPackageManager": "npm",
+    "clientTheme": "flatly",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "devServerPort": 4200,
+    "dtoSuffix": "Dto",
+    "enableHibernateCache": true,
+    "enableTranslation": true,
+    "entities": ["Usuario", "Eventos", "Inscricao", "Avaliacao"],
+    "jhiPrefix": "app",
+    "jhipsterVersion": "8.4.0",
+    "jwtSecretKey": "NzE5OGFlNTllMzMyOTM4MzVlMTU4OWM5Njg5M2QyYWQwZWRjZjE3MTAzNzE1MTIwOWYzZDdmZmEyMzU0NjM4NzlkZWMzNmJmNTVhMTJhYTY4NWVlZTcxNmUxNmU4Mjc3Mjg2ODIxZjMwOWU0MjQyODVkMmQzZmEzNzNiNzhhNGE=",
+    "languages": ["pt-br", "en", "es"],
+    "lastLiquibaseTimestamp": 1725885175000,
+    "nativeLanguage": "pt-br",
+    "packageFolder": "com/conexaosolidaria/app",
+    "packageName": "com.conexaosolidaria.app",
+    "prodDatabaseType": "mysql"
+  }
+}

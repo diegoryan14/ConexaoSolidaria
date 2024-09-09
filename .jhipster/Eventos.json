@@ -1,0 +1,42 @@
+{
+  "annotations": {
+    "changelogDate": "20240909123055"
+  },
+  "applications": ["ConexaoSolidaria"],
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "data",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "horaInicio",
+      "fieldType": "Duration"
+    },
+    {
+      "fieldName": "horaTermino",
+      "fieldType": "Duration"
+    },
+    {
+      "fieldName": "observacao",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Eventos",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "usuario",
+      "relationshipName": "usuario",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

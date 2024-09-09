@@ -1,0 +1,40 @@
+{
+  "annotations": {
+    "changelogDate": "20240909122955"
+  },
+  "applications": ["ConexaoSolidaria"],
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cpf",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cnpj",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tipoUser",
+      "fieldType": "TipoUser",
+      "fieldValues": "ENTIDADE,COLABORADOR"
+    },
+    {
+      "fieldName": "ativo",
+      "fieldType": "Ativo",
+      "fieldValues": "S,N"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Usuario",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

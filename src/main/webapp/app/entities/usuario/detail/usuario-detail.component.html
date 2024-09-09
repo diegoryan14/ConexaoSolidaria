@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (usuario()) {
+      <div>
+        <h2 data-cy="usuarioDetailsHeading"><span appTranslate="conexaoSolidariaApp.usuario.detail.title">Usuario</span></h2>
+
+        <hr />
+
+        <app-alert-error></app-alert-error>
+
+        <app-alert></app-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span appTranslate="global.field.id">Código</span></dt>
+          <dd>
+            <span>{{ usuario()!.id }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.usuario.nome">Nome</span></dt>
+          <dd>
+            <span>{{ usuario()!.nome }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.usuario.cpf">Cpf</span></dt>
+          <dd>
+            <span>{{ usuario()!.cpf }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.usuario.cnpj">Cnpj</span></dt>
+          <dd>
+            <span>{{ usuario()!.cnpj }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.usuario.email">Email</span></dt>
+          <dd>
+            <span>{{ usuario()!.email }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.usuario.tipoUser">Tipo User</span></dt>
+          <dd>
+            <span [appTranslate]="'conexaoSolidariaApp.TipoUser.' + (usuario()!.tipoUser ?? 'null')">{{
+              { null: '', ENTIDADE: 'ENTIDADE', COLABORADOR: 'COLABORADOR' }[usuario()!.tipoUser ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.usuario.ativo">Ativo</span></dt>
+          <dd>
+            <span [appTranslate]="'conexaoSolidariaApp.Ativo.' + (usuario()!.ativo ?? 'null')">{{
+              { null: '', S: 'S', N: 'N' }[usuario()!.ativo ?? 'null']
+            }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span appTranslate="entity.action.back">Voltar</span>
+        </button>
+
+        <button type="button" [routerLink]="['/usuario', usuario()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span appTranslate="entity.action.edit">Editar</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

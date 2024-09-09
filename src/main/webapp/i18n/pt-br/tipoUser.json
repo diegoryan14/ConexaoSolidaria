@@ -1,0 +1,9 @@
+{
+  "conexaoSolidariaApp": {
+    "TipoUser": {
+      "null": "",
+      "ENTIDADE": "ENTIDADE",
+      "COLABORADOR": "COLABORADOR"
+    }
+  }
+}

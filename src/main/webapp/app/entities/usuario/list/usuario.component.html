@@ -1,0 +1,151 @@
+<div>
+  <h2 id="page-heading" data-cy="UsuarioHeading">
+    <span appTranslate="conexaoSolidariaApp.usuario.home.title">Usuarios</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span appTranslate="conexaoSolidariaApp.usuario.home.refreshListLabel">Atualizar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-usuario"
+        [routerLink]="['/usuario/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span appTranslate="conexaoSolidariaApp.usuario.home.createLabel">Criar novo Usuario</span>
+      </button>
+    </div>
+  </h2>
+
+  <app-alert-error></app-alert-error>
+
+  <app-alert></app-alert>
+
+  <app-filter [filters]="filters"></app-filter>
+
+  @if (usuarios?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span appTranslate="conexaoSolidariaApp.usuario.home.notFound">Nenhum Usuario encontrado</span>
+    </div>
+  }
+
+  @if (usuarios && usuarios.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr appSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" appSortBy="id">
+              <div class="d-flex">
+                <span appTranslate="global.field.id">Código</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="nome">
+              <div class="d-flex">
+                <span appTranslate="conexaoSolidariaApp.usuario.nome">Nome</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="cpf">
+              <div class="d-flex">
+                <span appTranslate="conexaoSolidariaApp.usuario.cpf">Cpf</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="cnpj">
+              <div class="d-flex">
+                <span appTranslate="conexaoSolidariaApp.usuario.cnpj">Cnpj</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="email">
+              <div class="d-flex">
+                <span appTranslate="conexaoSolidariaApp.usuario.email">Email</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="tipoUser">
+              <div class="d-flex">
+                <span appTranslate="conexaoSolidariaApp.usuario.tipoUser">Tipo User</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" appSortBy="ativo">
+              <div class="d-flex">
+                <span appTranslate="conexaoSolidariaApp.usuario.ativo">Ativo</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (usuario of usuarios; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/usuario', usuario.id, 'view']">{{ usuario.id }}</a>
+              </td>
+              <td>{{ usuario.nome }}</td>
+              <td>{{ usuario.cpf }}</td>
+              <td>{{ usuario.cnpj }}</td>
+              <td>{{ usuario.email }}</td>
+              <td [appTranslate]="'conexaoSolidariaApp.TipoUser.' + (usuario.tipoUser ?? 'null')">
+                {{ { null: '', ENTIDADE: 'ENTIDADE', COLABORADOR: 'COLABORADOR' }[usuario.tipoUser ?? 'null'] }}
+              </td>
+              <td [appTranslate]="'conexaoSolidariaApp.Ativo.' + (usuario.ativo ?? 'null')">
+                {{ { null: '', S: 'S', N: 'N' }[usuario.ativo ?? 'null'] }}
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/usuario', usuario.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.view">Visualizar</span>
+                  </a>
+
+                  <a [routerLink]="['/usuario', usuario.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.edit">Editar</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(usuario)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" appTranslate="entity.action.delete">Excluir</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (usuarios && usuarios.length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <app-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></app-item-count>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

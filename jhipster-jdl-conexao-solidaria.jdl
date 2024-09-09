@@ -1,0 +1,77 @@
+application {
+    config {
+        baseName ConexaoSolidaria
+        packageName com.conexaosolidaria.app
+        applicationType monolith
+        authenticationType jwt
+        buildTool gradle
+        cacheProvider caffeine
+        databaseType sql
+        devDatabaseType mysql
+        prodDatabaseType mysql
+        dtoSuffix Dto
+        enableHibernateCache true
+        enableTranslation true
+        clientFramework angularX
+        clientPackageManager npm
+        clientTheme flatly
+        languages [en, es, pt-br]
+        nativeLanguage pt-br
+        jhiPrefix app
+    }
+    entities *
+}
+
+entity Usuario {
+    nome String,
+    cpf String,
+    cnpj String,
+    email String,
+    tipoUser TipoUser,
+    ativo Ativo
+}
+
+enum TipoUser {
+    ENTIDADE,
+    COLABORADOR
+}
+
+enum Ativo {
+    S,
+    N
+}
+
+entity Eventos {
+    nome String,
+    data Instant,
+    horaInicio Duration,
+    horaTermino Duration,
+    observacao String
+}
+
+entity Inscricao {
+    data Instant
+}
+
+entity Avaliacao {
+	estrelas Integer,
+    observacao String
+}
+
+relationship ManyToOne {
+    Eventos{usuario(nome)} to Usuario
+}
+
+relationship ManyToOne {
+    Inscricao{usuario(nome)} to Usuario,
+    Inscricao{evento(nome)} to Eventos
+}
+
+relationship ManyToOne {
+    Avaliacao{usuario(nome)} to Usuario,
+    Avaliacao{evento(nome)} to Eventos
+}
+
+paginate all with pagination
+filter *
+service all with serviceImpl

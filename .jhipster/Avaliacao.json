@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20240909123255"
+  },
+  "applications": ["ConexaoSolidaria"],
+  "fields": [
+    {
+      "fieldName": "estrelas",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "observacao",
+      "fieldType": "String"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Avaliacao",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "usuario",
+      "relationshipName": "usuario",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nome",
+      "otherEntityName": "eventos",
+      "relationshipName": "evento",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

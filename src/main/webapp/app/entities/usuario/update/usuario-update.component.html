@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="app-usuario-heading" data-cy="UsuarioCreateUpdateHeading" appTranslate="conexaoSolidariaApp.usuario.home.createOrEditLabel">
+        Criar ou editar Usuario
+      </h2>
+
+      <div>
+        <app-alert-error></app-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" appTranslate="conexaoSolidariaApp.usuario.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_nome" appTranslate="conexaoSolidariaApp.usuario.nome">Nome</label>
+          <input type="text" class="form-control" name="nome" id="field_nome" data-cy="nome" formControlName="nome" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_cpf" appTranslate="conexaoSolidariaApp.usuario.cpf">Cpf</label>
+          <input type="text" class="form-control" name="cpf" id="field_cpf" data-cy="cpf" formControlName="cpf" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_cnpj" appTranslate="conexaoSolidariaApp.usuario.cnpj">Cnpj</label>
+          <input type="text" class="form-control" name="cnpj" id="field_cnpj" data-cy="cnpj" formControlName="cnpj" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_email" appTranslate="conexaoSolidariaApp.usuario.email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_tipoUser" appTranslate="conexaoSolidariaApp.usuario.tipoUser">Tipo User</label>
+          <select class="form-control" name="tipoUser" formControlName="tipoUser" id="field_tipoUser" data-cy="tipoUser">
+            <option [ngValue]="null">{{ 'conexaoSolidariaApp.TipoUser.null' | translate }}</option>
+            @for (tipoUser of tipoUserValues; track $index) {
+              <option [value]="tipoUser">{{ 'conexaoSolidariaApp.TipoUser.' + tipoUser | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_ativo" appTranslate="conexaoSolidariaApp.usuario.ativo">Ativo</label>
+          <select class="form-control" name="ativo" formControlName="ativo" id="field_ativo" data-cy="ativo">
+            <option [ngValue]="null">{{ 'conexaoSolidariaApp.Ativo.null' | translate }}</option>
+            @for (ativo of ativoValues; track $index) {
+              <option [value]="ativo">{{ 'conexaoSolidariaApp.Ativo.' + ativo | translate }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span appTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span appTranslate="entity.action.save">Salvar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

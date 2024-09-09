@@ -1,0 +1,251 @@
+package com.conexaosolidaria.app.service.criteria;
+
+import java.io.Serializable;
+import java.util.Objects;
+import java.util.Optional;
+import org.springdoc.core.annotations.ParameterObject;
+import tech.jhipster.service.Criteria;
+import tech.jhipster.service.filter.*;
+
+/**
+ * Criteria class for the {@link com.conexaosolidaria.app.domain.Eventos} entity. This class is used
+ * in {@link com.conexaosolidaria.app.web.rest.EventosResource} to receive all the possible filtering options from
+ * the Http GET request parameters.
+ * For example the following could be a valid request:
+ * {@code /eventos?id.greaterThan=5&attr1.contains=something&attr2.specified=false}
+ * As Spring is unable to properly convert the types, unless specific {@link Filter} class are used, we need to use
+ * fix type specific filters.
+ */
+@ParameterObject
+@SuppressWarnings("common-java:DuplicatedBlocks")
+public class EventosCriteria implements Serializable, Criteria {
+
+    private static final long serialVersionUID = 1L;
+
+    private LongFilter id;
+
+    private StringFilter nome;
+
+    private InstantFilter data;
+
+    private DurationFilter horaInicio;
+
+    private DurationFilter horaTermino;
+
+    private StringFilter observacao;
+
+    private LongFilter usuarioId;
+
+    private Boolean distinct;
+
+    public EventosCriteria() {}
+
+    public EventosCriteria(EventosCriteria other) {
+        this.id = other.optionalId().map(LongFilter::copy).orElse(null);
+        this.nome = other.optionalNome().map(StringFilter::copy).orElse(null);
+        this.data = other.optionalData().map(InstantFilter::copy).orElse(null);
+        this.horaInicio = other.optionalHoraInicio().map(DurationFilter::copy).orElse(null);
+        this.horaTermino = other.optionalHoraTermino().map(DurationFilter::copy).orElse(null);
+        this.observacao = other.optionalObservacao().map(StringFilter::copy).orElse(null);
+        this.usuarioId = other.optionalUsuarioId().map(LongFilter::copy).orElse(null);
+        this.distinct = other.distinct;
+    }
+
+    @Override
+    public EventosCriteria copy() {
+        return new EventosCriteria(this);
+    }
+
+    public LongFilter getId() {
+        return id;
+    }
+
+    public Optional<LongFilter> optionalId() {
+        return Optional.ofNullable(id);
+    }
+
+    public LongFilter id() {
+        if (id == null) {
+            setId(new LongFilter());
+        }
+        return id;
+    }
+
+    public void setId(LongFilter id) {
+        this.id = id;
+    }
+
+    public StringFilter getNome() {
+        return nome;
+    }
+
+    public Optional<StringFilter> optionalNome() {
+        return Optional.ofNullable(nome);
+    }
+
+    public StringFilter nome() {
+        if (nome == null) {
+            setNome(new StringFilter());
+        }
+        return nome;
+    }
+
+    public void setNome(StringFilter nome) {
+        this.nome = nome;
+    }
+
+    public InstantFilter getData() {
+        return data;
+    }
+
+    public Optional<InstantFilter> optionalData() {
+        return Optional.ofNullable(data);
+    }
+
+    public InstantFilter data() {
+        if (data == null) {
+            setData(new InstantFilter());
+        }
+        return data;
+    }
+
+    public void setData(InstantFilter data) {
+        this.data = data;
+    }
+
+    public DurationFilter getHoraInicio() {
+        return horaInicio;
+    }
+
+    public Optional<DurationFilter> optionalHoraInicio() {
+        return Optional.ofNullable(horaInicio);
+    }
+
+    public DurationFilter horaInicio() {
+        if (horaInicio == null) {
+            setHoraInicio(new DurationFilter());
+        }
+        return horaInicio;
+    }
+
+    public void setHoraInicio(DurationFilter horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public DurationFilter getHoraTermino() {
+        return horaTermino;
+    }
+
+    public Optional<DurationFilter> optionalHoraTermino() {
+        return Optional.ofNullable(horaTermino);
+    }
+
+    public DurationFilter horaTermino() {
+        if (horaTermino == null) {
+            setHoraTermino(new DurationFilter());
+        }
+        return horaTermino;
+    }
+
+    public void setHoraTermino(DurationFilter horaTermino) {
+        this.horaTermino = horaTermino;
+    }
+
+    public StringFilter getObservacao() {
+        return observacao;
+    }
+
+    public Optional<StringFilter> optionalObservacao() {
+        return Optional.ofNullable(observacao);
+    }
+
+    public StringFilter observacao() {
+        if (observacao == null) {
+            setObservacao(new StringFilter());
+        }
+        return observacao;
+    }
+
+    public void setObservacao(StringFilter observacao) {
+        this.observacao = observacao;
+    }
+
+    public LongFilter getUsuarioId() {
+        return usuarioId;
+    }
+
+    public Optional<LongFilter> optionalUsuarioId() {
+        return Optional.ofNullable(usuarioId);
+    }
+
+    public LongFilter usuarioId() {
+        if (usuarioId == null) {
+            setUsuarioId(new LongFilter());
+        }
+        return usuarioId;
+    }
+
+    public void setUsuarioId(LongFilter usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public Boolean getDistinct() {
+        return distinct;
+    }
+
+    public Optional<Boolean> optionalDistinct() {
+        return Optional.ofNullable(distinct);
+    }
+
+    public Boolean distinct() {
+        if (distinct == null) {
+            setDistinct(true);
+        }
+        return distinct;
+    }
+
+    public void setDistinct(Boolean distinct) {
+        this.distinct = distinct;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final EventosCriteria that = (EventosCriteria) o;
+        return (
+            Objects.equals(id, that.id) &&
+            Objects.equals(nome, that.nome) &&
+            Objects.equals(data, that.data) &&
+            Objects.equals(horaInicio, that.horaInicio) &&
+            Objects.equals(horaTermino, that.horaTermino) &&
+            Objects.equals(observacao, that.observacao) &&
+            Objects.equals(usuarioId, that.usuarioId) &&
+            Objects.equals(distinct, that.distinct)
+        );
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nome, data, horaInicio, horaTermino, observacao, usuarioId, distinct);
+    }
+
+    // prettier-ignore
+    @Override
+    public String toString() {
+        return "EventosCriteria{" +
+            optionalId().map(f -> "id=" + f + ", ").orElse("") +
+            optionalNome().map(f -> "nome=" + f + ", ").orElse("") +
+            optionalData().map(f -> "data=" + f + ", ").orElse("") +
+            optionalHoraInicio().map(f -> "horaInicio=" + f + ", ").orElse("") +
+            optionalHoraTermino().map(f -> "horaTermino=" + f + ", ").orElse("") +
+            optionalObservacao().map(f -> "observacao=" + f + ", ").orElse("") +
+            optionalUsuarioId().map(f -> "usuarioId=" + f + ", ").orElse("") +
+            optionalDistinct().map(f -> "distinct=" + f + ", ").orElse("") +
+        "}";
+    }
+}
