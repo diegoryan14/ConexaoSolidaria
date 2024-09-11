@@ -73,6 +73,10 @@ relationship ManyToOne {
     Avaliacao{evento(nome)} to Eventos
 }
 
+relationship OneToOne {
+    Usuario{user(login)} to User with builtInEntity
+}
+
 paginate all with pagination
 filter *
 service all with serviceImpl

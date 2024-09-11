@@ -43,6 +43,10 @@ public class Usuario implements Serializable {
     @Column(name = "ativo")
     private Ativo ativo;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(unique = true)
+    private User user;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -134,6 +138,19 @@ public class Usuario implements Serializable {
 
     public void setAtivo(Ativo ativo) {
         this.ativo = ativo;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Usuario user(User user) {
+        this.setUser(user);
+        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

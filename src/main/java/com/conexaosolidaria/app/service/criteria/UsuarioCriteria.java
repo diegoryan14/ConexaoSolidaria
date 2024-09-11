@@ -72,6 +72,8 @@ public class UsuarioCriteria implements Serializable, Criteria {
 
     private AtivoFilter ativo;
 
+    private LongFilter userId;
+
     private Boolean distinct;
 
     public UsuarioCriteria() {}
@@ -84,6 +86,7 @@ public class UsuarioCriteria implements Serializable, Criteria {
         this.email = other.optionalEmail().map(StringFilter::copy).orElse(null);
         this.tipoUser = other.optionalTipoUser().map(TipoUserFilter::copy).orElse(null);
         this.ativo = other.optionalAtivo().map(AtivoFilter::copy).orElse(null);
+        this.userId = other.optionalUserId().map(LongFilter::copy).orElse(null);
         this.distinct = other.distinct;
     }
 
@@ -225,6 +228,25 @@ public class UsuarioCriteria implements Serializable, Criteria {
         this.ativo = ativo;
     }
 
+    public LongFilter getUserId() {
+        return userId;
+    }
+
+    public Optional<LongFilter> optionalUserId() {
+        return Optional.ofNullable(userId);
+    }
+
+    public LongFilter userId() {
+        if (userId == null) {
+            setUserId(new LongFilter());
+        }
+        return userId;
+    }
+
+    public void setUserId(LongFilter userId) {
+        this.userId = userId;
+    }
+
     public Boolean getDistinct() {
         return distinct;
     }
@@ -261,13 +283,14 @@ public class UsuarioCriteria implements Serializable, Criteria {
             Objects.equals(email, that.email) &&
             Objects.equals(tipoUser, that.tipoUser) &&
             Objects.equals(ativo, that.ativo) &&
+            Objects.equals(userId, that.userId) &&
             Objects.equals(distinct, that.distinct)
         );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, cpf, cnpj, email, tipoUser, ativo, distinct);
+        return Objects.hash(id, nome, cpf, cnpj, email, tipoUser, ativo, userId, distinct);
     }
 
     // prettier-ignore
@@ -281,6 +304,7 @@ public class UsuarioCriteria implements Serializable, Criteria {
             optionalEmail().map(f -> "email=" + f + ", ").orElse("") +
             optionalTipoUser().map(f -> "tipoUser=" + f + ", ").orElse("") +
             optionalAtivo().map(f -> "ativo=" + f + ", ").orElse("") +
+            optionalUserId().map(f -> "userId=" + f + ", ").orElse("") +
             optionalDistinct().map(f -> "distinct=" + f + ", ").orElse("") +
         "}";
     }

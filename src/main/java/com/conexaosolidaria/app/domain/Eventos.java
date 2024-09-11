@@ -1,5 +1,6 @@
 package com.conexaosolidaria.app.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -41,6 +42,7 @@ public class Eventos implements Serializable {
     private String observacao;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
     private Usuario usuario;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

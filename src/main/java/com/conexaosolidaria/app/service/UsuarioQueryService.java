@@ -4,6 +4,7 @@ import com.conexaosolidaria.app.domain.*; // for static metamodels
 import com.conexaosolidaria.app.domain.Usuario;
 import com.conexaosolidaria.app.repository.UsuarioRepository;
 import com.conexaosolidaria.app.service.criteria.UsuarioCriteria;
+import jakarta.persistence.criteria.JoinType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -88,6 +89,11 @@ public class UsuarioQueryService extends QueryService<Usuario> {
             }
             if (criteria.getAtivo() != null) {
                 specification = specification.and(buildSpecification(criteria.getAtivo(), Usuario_.ativo));
+            }
+            if (criteria.getUserId() != null) {
+                specification = specification.and(
+                    buildSpecification(criteria.getUserId(), root -> root.join(Usuario_.user, JoinType.LEFT).get(User_.id))
+                );
             }
         }
         return specification;

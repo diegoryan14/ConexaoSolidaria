@@ -6,6 +6,8 @@ import com.conexaosolidaria.app.service.UsuarioService;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,11 +69,15 @@ public class UsuarioServiceImpl implements UsuarioService {
             .map(usuarioRepository::save);
     }
 
+    public Page<Usuario> findAllWithEagerRelationships(Pageable pageable) {
+        return usuarioRepository.findAllWithEagerRelationships(pageable);
+    }
+
     @Override
     @Transactional(readOnly = true)
     public Optional<Usuario> findOne(Long id) {
         log.debug("Request to get Usuario : {}", id);
-        return usuarioRepository.findById(id);
+        return usuarioRepository.findOneWithEagerRelationships(id);
     }
 
     @Override

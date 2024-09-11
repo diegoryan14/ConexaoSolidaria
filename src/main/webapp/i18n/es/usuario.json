@@ -23,7 +23,8 @@
       "cnpj": "Cnpj",
       "email": "Email",
       "tipoUser": "Tipo User",
-      "ativo": "Ativo"
+      "ativo": "Ativo",
+      "user": "User"
     }
   }
 }

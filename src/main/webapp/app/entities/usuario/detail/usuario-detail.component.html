@@ -43,6 +43,10 @@
               { null: '', S: 'S', N: 'N' }[usuario()!.ativo ?? 'null']
             }}</span>
           </dd>
+          <dt><span appTranslate="conexaoSolidariaApp.usuario.user">User</span></dt>
+          <dd>
+            <span>{{ usuario()!.user?.login }}</span>
+          </dd>
         </dl>
 
         <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

@@ -26,6 +26,7 @@ describe('Usuario Form Service', () => {
             email: expect.any(Object),
             tipoUser: expect.any(Object),
             ativo: expect.any(Object),
+            user: expect.any(Object),
           }),
         );
       });
@@ -42,6 +43,7 @@ describe('Usuario Form Service', () => {
             email: expect.any(Object),
             tipoUser: expect.any(Object),
             ativo: expect.any(Object),
+            user: expect.any(Object),
           }),
         );
       });

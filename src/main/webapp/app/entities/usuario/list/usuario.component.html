@@ -86,6 +86,12 @@
                 <fa-icon class="p-1" icon="sort"></fa-icon>
               </div>
             </th>
+            <th scope="col" appSortBy="user.login">
+              <div class="d-flex">
+                <span appTranslate="conexaoSolidariaApp.usuario.user">User</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -104,6 +110,9 @@
               </td>
               <td [appTranslate]="'conexaoSolidariaApp.Ativo.' + (usuario.ativo ?? 'null')">
                 {{ { null: '', S: 'S', N: 'N' }[usuario.ativo ?? 'null'] }}
+              </td>
+              <td>
+                {{ usuario.user?.login }}
               </td>
               <td class="text-end">
                 <div class="btn-group">

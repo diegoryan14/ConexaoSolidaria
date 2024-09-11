@@ -123,6 +123,7 @@ export class UsuarioComponent implements OnInit {
     const queryObject: any = {
       page: pageToLoad - 1,
       size: this.itemsPerPage,
+      eagerload: true,
       sort: this.sortService.buildSortParam(this.sortState()),
     };
     filters.filterOptions.forEach(filterOption => {

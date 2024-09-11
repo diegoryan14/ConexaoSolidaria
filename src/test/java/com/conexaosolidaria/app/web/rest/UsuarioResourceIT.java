@@ -4,22 +4,31 @@ import static com.conexaosolidaria.app.domain.UsuarioAsserts.*;
 import static com.conexaosolidaria.app.web.rest.TestUtil.createUpdateProxyForBean;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.conexaosolidaria.app.IntegrationTest;
+import com.conexaosolidaria.app.domain.User;
 import com.conexaosolidaria.app.domain.Usuario;
 import com.conexaosolidaria.app.domain.enumeration.Ativo;
 import com.conexaosolidaria.app.domain.enumeration.TipoUser;
 import com.conexaosolidaria.app.repository.UsuarioRepository;
+import com.conexaosolidaria.app.service.UsuarioService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -29,6 +38,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Integration tests for the {@link UsuarioResource} REST controller.
  */
 @IntegrationTest
+@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class UsuarioResourceIT {
@@ -62,6 +72,12 @@ class UsuarioResourceIT {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Mock
+    private UsuarioRepository usuarioRepositoryMock;
+
+    @Mock
+    private UsuarioService usuarioServiceMock;
 
     @Autowired
     private EntityManager em;
@@ -165,6 +181,23 @@ class UsuarioResourceIT {
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].tipoUser").value(hasItem(DEFAULT_TIPO_USER.toString())))
             .andExpect(jsonPath("$.[*].ativo").value(hasItem(DEFAULT_ATIVO.toString())));
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllUsuariosWithEagerRelationshipsIsEnabled() throws Exception {
+        when(usuarioServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restUsuarioMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
+
+        verify(usuarioServiceMock, times(1)).findAllWithEagerRelationships(any());
+    }
+
+    @SuppressWarnings({ "unchecked" })
+    void getAllUsuariosWithEagerRelationshipsIsNotEnabled() throws Exception {
+        when(usuarioServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
+
+        restUsuarioMockMvc.perform(get(ENTITY_API_URL + "?eagerload=false")).andExpect(status().isOk());
+        verify(usuarioRepositoryMock, times(1)).findAll(any(Pageable.class));
     }
 
     @Test
@@ -460,6 +493,28 @@ class UsuarioResourceIT {
 
         // Get all the usuarioList where ativo is not null
         defaultUsuarioFiltering("ativo.specified=true", "ativo.specified=false");
+    }
+
+    @Test
+    @Transactional
+    void getAllUsuariosByUserIsEqualToSomething() throws Exception {
+        User user;
+        if (TestUtil.findAll(em, User.class).isEmpty()) {
+            usuarioRepository.saveAndFlush(usuario);
+            user = UserResourceIT.createEntity(em);
+        } else {
+            user = TestUtil.findAll(em, User.class).get(0);
+        }
+        em.persist(user);
+        em.flush();
+        usuario.setUser(user);
+        usuarioRepository.saveAndFlush(usuario);
+        Long userId = user.getId();
+        // Get all the usuarioList where user equals to userId
+        defaultUsuarioShouldBeFound("userId.equals=" + userId);
+
+        // Get all the usuarioList where user equals to (userId + 1)
+        defaultUsuarioShouldNotBeFound("userId.equals=" + (userId + 1));
     }
 
     private void defaultUsuarioFiltering(String shouldBeFound, String shouldNotBeFound) throws Exception {

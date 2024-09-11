@@ -29,6 +29,7 @@ public class Avaliacao implements Serializable {
     private String observacao;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
     private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -24,6 +24,7 @@ type UsuarioFormGroupContent = {
   email: FormControl<IUsuario['email']>;
   tipoUser: FormControl<IUsuario['tipoUser']>;
   ativo: FormControl<IUsuario['ativo']>;
+  user: FormControl<IUsuario['user']>;
 };
 
 export type UsuarioFormGroup = FormGroup<UsuarioFormGroupContent>;
@@ -49,6 +50,7 @@ export class UsuarioFormService {
       email: new FormControl(usuarioRawValue.email),
       tipoUser: new FormControl(usuarioRawValue.tipoUser),
       ativo: new FormControl(usuarioRawValue.ativo),
+      user: new FormControl(usuarioRawValue.user),
     });
   }
 

@@ -14,6 +14,7 @@ import { RegisterService } from './register.service';
   selector: 'app-register',
   imports: [SharedModule, RouterModule, FormsModule, ReactiveFormsModule, PasswordStrengthBarComponent],
   templateUrl: './register.component.html',
+  styleUrl: './register.component.scss',
 })
 export default class RegisterComponent implements AfterViewInit {
   @ViewChild('login', { static: false })

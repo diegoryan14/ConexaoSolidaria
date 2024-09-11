@@ -27,6 +27,7 @@ public class Inscricao implements Serializable {
     private Instant data;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value = { "user" }, allowSetters = true)
     private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY)

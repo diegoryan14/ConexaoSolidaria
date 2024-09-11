@@ -81,6 +81,7 @@ class UsuarioCriteriaTest {
         usuarioCriteria.email();
         usuarioCriteria.tipoUser();
         usuarioCriteria.ativo();
+        usuarioCriteria.userId();
         usuarioCriteria.distinct();
     }
 
@@ -94,6 +95,7 @@ class UsuarioCriteriaTest {
                 condition.apply(criteria.getEmail()) &&
                 condition.apply(criteria.getTipoUser()) &&
                 condition.apply(criteria.getAtivo()) &&
+                condition.apply(criteria.getUserId()) &&
                 condition.apply(criteria.getDistinct()),
             "every filter matches"
         );
@@ -109,6 +111,7 @@ class UsuarioCriteriaTest {
                 condition.apply(criteria.getEmail(), copy.getEmail()) &&
                 condition.apply(criteria.getTipoUser(), copy.getTipoUser()) &&
                 condition.apply(criteria.getAtivo(), copy.getAtivo()) &&
+                condition.apply(criteria.getUserId(), copy.getUserId()) &&
                 condition.apply(criteria.getDistinct(), copy.getDistinct()),
             "every filter matches"
         );
