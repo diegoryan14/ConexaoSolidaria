@@ -1,12 +1,12 @@
 .dividir {
-  width: 100vw;
+  width: 98vw;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
 }
 
 .tela-verde {
-  background: #153005;
+  background: #1b4965;
   position: relative;
 }
 
@@ -101,8 +101,8 @@
 
 .button-login {
   border-radius: 5px;
-  background-color: #2f6e52;
-  border-color: #2f6e52;
+  background-color: #1b4965;
+  border-color: #1b4965;
   color: white;
   width: 100%;
   opacity: 100;
@@ -268,3 +268,13 @@
     width: 100%;
   }
 }
+
+/* 
+ POSSIVEIS CORES PROJETO
+
+  Verde claro (#A8E6CF)
+  Azul claro (#D4F1F4)
+  Verde escuro (#56C596)
+  Azul escuro (#1B4965)
+
+*/

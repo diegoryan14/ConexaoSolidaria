@@ -51,7 +51,7 @@ export default class LoginComponent implements OnInit, AfterViewInit {
           this.router.navigate(['']);
         }
       },
-      error: () => this.authenticationError.set(true),
+      error: () => (this.authenticationError.set(true), (this.visible = true)),
     });
   }
 }

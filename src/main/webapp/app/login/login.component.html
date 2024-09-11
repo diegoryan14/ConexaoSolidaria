@@ -10,7 +10,7 @@
   <div class="login-side">
     <form class="login-container" [formGroup]="loginForm">
       <div class="img-logo">
-        <div class="logo"></div>
+        <div class="logo">Logo</div>
       </div>
       <div class="input-login">
         <label for="username">Usuário</label>
@@ -27,13 +27,11 @@
           data-cy="password"
         ></p-password>
       </div>
-      <!-- @if (authenticationError) {
-        <p-dialog [(visible)]="visible" [modal]="true" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
-          <div class="alert alert-danger d-flex" data-cy="loginError">
-            Usuário ou senha incorreto, por favor, tente novamente.
-          </div>
+      @if (authenticationError()) {
+        <p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+          <div class="alert alert-danger d-flex" data-cy="loginError">Usuário ou senha incorreto, por favor, tente novamente.</div>
         </p-dialog>
-      } -->
+      }
       <div class="forgot-password">
         <a [routerLink]="['/account/reset/request']">Esqueci minha senha</a>
       </div>
