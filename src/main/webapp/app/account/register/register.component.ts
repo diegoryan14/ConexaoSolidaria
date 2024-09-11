@@ -26,6 +26,8 @@ export default class RegisterComponent implements AfterViewInit {
   errorUserExists = signal(false);
   success = signal(false);
 
+  UserOrEntity: boolean = true; /* true para user, false para entity */
+
   registerForm = new FormGroup({
     login: new FormControl('', {
       nonNullable: true,
@@ -74,6 +76,16 @@ export default class RegisterComponent implements AfterViewInit {
         .save({ login, email, password, langKey: this.translateService.currentLang })
         .subscribe({ next: () => this.success.set(true), error: response => this.processError(response) });
     }
+  }
+
+  newEntity(): void {
+    this.UserOrEntity = false;
+    this.registerForm.reset();
+  }
+
+  newUser(): void {
+    this.UserOrEntity = true;
+    this.registerForm.reset();
   }
 
   private processError(response: HttpErrorResponse): void {

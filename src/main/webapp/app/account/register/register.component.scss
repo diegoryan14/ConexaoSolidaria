@@ -1,12 +1,12 @@
 .dividir {
-  width: 100vw;
+  width: 98vw;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
 }
 
 .tela-verde {
-  background: #153005;
+  background: #1b4965;
   position: relative;
 }
 
@@ -75,6 +75,7 @@
 }
 
 .login-container {
+  margin-top: -250px;
   padding: 20px;
   width: 400px;
   height: 33rem;
@@ -101,8 +102,8 @@
 
 .button-login {
   border-radius: 5px;
-  background-color: #2f6e52;
-  border-color: #2f6e52;
+  background-color: #1b4965;
+  border-color: #1b4965;
   color: white;
   width: 100%;
   opacity: 100;
@@ -112,7 +113,7 @@
 }
 .button-login:enabled:hover,
 .button-login:focus {
-  border-color: #2f6e52 !important;
+  border-color: #1b4965 !important;
 }
 
 .forgot-password {
