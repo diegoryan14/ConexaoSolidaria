@@ -16,7 +16,7 @@ import { AccountService } from 'app/core/auth/account.service';
 export default class LoginComponent implements OnInit, AfterViewInit {
   @ViewChild('username', { static: false })
   username!: ElementRef;
-
+  visible: boolean = false;
   authenticationError = signal(false);
 
   loginForm = new FormGroup({
